@@ -1,12 +1,13 @@
 let path = require('path');
 let ExtractTextPlugin = require('extract-text-webpack-plugin');
+let HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './assets/js/script.js',
   output: {
     path: path.join(__dirname, './dist'),
-    filename: 'bundle.js',
-    publicPath: './dist/'
+    filename: 'bundle.[chunkhash].js',
+    //publicPath: './dist/'
   },
   module: {
     rules: [
@@ -52,6 +53,9 @@ module.exports = {
     ]
   },
   plugins: [
-    new ExtractTextPlugin('./css/style.css')
+    new ExtractTextPlugin('./css/style.[hash].css'),
+    new HtmlWebpackPlugin({
+      template: "assets/index.html"
+    })
   ]
 }
